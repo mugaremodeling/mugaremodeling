@@ -1,0 +1,10 @@
+# Temporary files
+*.bak
+*_old.html
+*_temp.html
+setup_git.bat
+push_to_github.bat
+_writing_test.txt
+
+# Large general gallery photos (WhatsApp originals)
+gallery/general/
