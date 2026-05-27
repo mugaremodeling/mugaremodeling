@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Free Estimate — MuGa Remodeling · West Coast Florida</title>
+  <meta name="description" content="Book your free remodeling estimate with MuGa Remodeling. Alejandro or Bryant will respond within 1 hour. Serving Tampa Bay and West Coast Florida." />
+  <link rel="canonical" href="https://mugaremodeling.com/free-quote.html" />
+  <meta property="og:title" content="Free Estimate — MuGa Remodeling" />
+  <meta property="og:description" content="Schedule your free remodeling estimate online. No obligation, no pressure. West Coast Florida." />
+  <meta property="og:image" content="https://mugaremodeling.com/gallery/MuGaLogo.png" />
+  <meta property="og:url" content="https://mugaremodeling.com/free-quote.html" />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/png" href="gallery/MuGaLogo.png" />
+  <link rel="shortcut icon" href="favicon.ico" />
+  <meta name="theme-color" content="#C8960C" />
+  <!-- Calendly widget CSS -->
+  <link href="https://assets.calendly.com/assets/external/widget.css" rel="stylesheet" />
+  <style>
+    /* ── Free Quote Page — local styles ── */
+    .fq-hero {
+      background: var(--text);
+      padding: 72px 0 0;
+      position: relative;
+      overflow: hidden;
+    }
+    .fq-hero::before {
+      content: '';
+      position: absolute;
+      top: -40%; right: -5%;
+      width: 600px; height: 600px;
+      background: radial-gradient(circle, rgba(200,150,12,0.14) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .fq-hero-inner {
+      position: relative; z-index: 2;
+      text-align: center; max-width: 660px;
+      margin: 0 auto; padding-bottom: 64px;
+    }
+    .fq-hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(200,150,12,0.15);
+      border: 1px solid rgba(200,150,12,0.35);
+      color: var(--gold-light);
+      font-size: 0.65rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase;
+      padding: 7px 18px; border-radius: 100px; margin-bottom: 22px;
+    }
+    .fq-hero-eyebrow::before {
+      content: ''; width: 6px; height: 6px;
+      background: var(--gold-light); border-radius: 50%;
+      animation: pulseDot 2s ease infinite;
+    }
+    .fq-hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 4vw, 3.8rem);
+      font-weight: 600; line-height: 1.1;
+      color: #fff; margin-bottom: 16px;
+    }
+    .fq-hero-title em { font-style: italic; color: var(--gold-light); }
+    .fq-hero-sub {
+      font-size: 1rem; color: rgba(255,255,255,0.65);
+      line-height: 1.8; margin-bottom: 32px;
+    }
+    .fq-hero-trust {
+      display: flex; align-items: center; justify-content: center;
+      gap: 22px; flex-wrap: wrap;
+      font-size: 0.7rem; font-weight: 500; color: rgba(255,255,255,0.5);
+    }
+    .fq-hero-trust span { display: flex; align-items: center; gap: 7px; }
+    .fq-hero-trust i { color: var(--gold-light); }
+
+    /* Stats ribbon */
+    .fq-stats-ribbon {
+      background: var(--gold);
+      padding: 14px 0;
+    }
+    .fq-stats-inner {
+      display: flex; align-items: center; justify-content: center;
+      gap: 52px; flex-wrap: wrap;
+    }
+    .fq-stat { text-align: center; }
+    .fq-stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.45rem; color: #fff; line-height: 1;
+    }
+    .fq-stat-lbl { font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(255,255,255,0.85); margin-top: 2px; }
+
+    /* Main layout */
+    .fq-body { background: var(--bg-section); padding: 64px 0 88px; }
+    .fq-layout {
+      display: grid; grid-template-columns: 320px 1fr;
+      gap: 30px; align-items: start;
+    }
+    .fq-sidebar { position: sticky; top: 130px; display: flex; flex-direction: column; gap: 18px; }
+
+    /* Sidebar cards */
+    .fq-scard {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius-xl); padding: 26px 22px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.04);
+    }
+    .fq-scard-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.08rem; font-weight: 600; color: var(--text); margin-bottom: 4px;
+    }
+    .fq-scard-sub { font-size: 0.78rem; color: var(--text-3); margin-bottom: 16px; line-height: 1.6; }
+
+    /* Contact buttons in sidebar */
+    .fq-contact-btn {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--bg-section); border: 1.5px solid var(--border);
+      border-radius: var(--radius-lg); padding: 13px 15px; margin-bottom: 9px;
+      cursor: pointer; text-decoration: none; color: inherit;
+      transition: all var(--t);
+    }
+    .fq-contact-btn:hover { border-color: var(--gold); background: var(--gold-pale); }
+    .fq-contact-icon {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--gold); display: flex; align-items: center; justify-content: center;
+      color: #fff; font-size: 0.88rem; flex-shrink: 0;
+    }
+    .fq-contact-label { font-size: 0.58rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-4); }
+    .fq-contact-val { font-size: 0.9rem; font-weight: 700; color: var(--text); }
+
+    /* Trust list */
+    .fq-trust-list { margin-top: 16px; display: flex; flex-direction: column; gap: 10px; }
+    .fq-trust-item { display: flex; align-items: center; gap: 9px; font-size: 0.82rem; color: var(--text-2); }
+    .fq-trust-item i { color: var(--gold); font-size: 0.76rem; flex-shrink: 0; width: 14px; }
+
+    /* How it works steps */
+    .fq-steps { display: flex; flex-direction: column; gap: 13px; }
+    .fq-step { display: flex; align-items: flex-start; gap: 12px; }
+    .fq-step-num {
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--gold); color: #fff;
+      font-family: 'Bebas Neue', sans-serif; font-size: 0.88rem;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; margin-top: 1px;
+    }
+    .fq-step-title { font-size: 0.85rem; font-weight: 600; color: var(--text); }
+    .fq-step-desc { font-size: 0.77rem; color: var(--text-3); margin-top: 2px; line-height: 1.5; }
+
+    /* Calendly container */
+    .fq-calendly-wrap {
+      background: var(--white); border: 1px solid var(--border);
+      border-radius: var(--radius-xl); overflow: hidden;
+      box-shadow: 0 4px 28px rgba(0,0,0,0.06);
+    }
+    .fq-cal-header {
+      background: linear-gradient(135deg, var(--text) 0%, #2e2720 100%);
+      padding: 26px 30px; position: relative; overflow: hidden;
+    }
+    .fq-cal-header::after {
+      content: '';
+      position: absolute; top: -50%; right: -10%;
+      width: 240px; height: 240px;
+      background: radial-gradient(circle, rgba(200,150,12,0.2) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .fq-cal-header-inner { position: relative; z-index: 1; }
+    .fq-cal-label {
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 5px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .fq-cal-label::before { content: ''; display: block; width: 22px; height: 1px; background: var(--gold); }
+    .fq-cal-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 600; color: #fff; margin-bottom: 3px; }
+    .fq-cal-sub { font-size: 0.78rem; color: rgba(255,255,255,0.5); }
+    .fq-cal-badges { display: flex; gap: 7px; margin-top: 13px; flex-wrap: wrap; }
+    .fq-cal-badge {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: rgba(255,255,255,0.07); border: 1px solid rgba(255,255,255,0.12);
+      padding: 4px 10px; border-radius: 100px;
+      font-size: 0.58rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+    }
+    .fq-cal-badge i { color: var(--gold); font-size: 0.56rem; }
+
+    /* Why section */
+    .fq-why { background: var(--white); padding: 64px 0; }
+    .fq-why-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px; }
+    .fq-why-card {
+      border: 1px solid var(--border); border-radius: var(--radius-lg);
+      padding: 26px 20px; text-align: center; transition: all var(--t);
+    }
+    .fq-why-card:hover { border-color: var(--gold-border); box-shadow: 0 6px 24px rgba(200,150,12,0.1); transform: translateY(-3px); }
+    .fq-why-icon {
+      width: 46px; height: 46px; border-radius: 50%;
+      background: var(--gold-pale); border: 1px solid var(--gold-border);
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 13px; transition: all var(--t);
+    }
+    .fq-why-card:hover .fq-why-icon { background: var(--gold); }
+    .fq-why-card:hover .fq-why-icon i { color: #fff; }
+    .fq-why-icon i { font-size: 0.95rem; color: var(--gold); transition: color var(--t); }
+    .fq-why-title { font-family: 'Playfair Display', serif; font-size: 0.98rem; font-weight: 600; color: var(--text); margin-bottom: 7px; }
+    .fq-why-desc { font-size: 0.8rem; color: var(--text-3); line-height: 1.7; }
+
+    @media (max-width: 960px) {
+      .fq-layout { grid-template-columns: 1fr; }
+      .fq-sidebar { position: static; }
+      .fq-why-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 600px) {
+      .fq-why-grid { grid-template-columns: 1fr; }
+      .fq-stats-inner { gap: 24px; }
+      .fq-hero-trust { gap: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <a href="tel:+18135785506"><i class="fas fa-phone"></i> +1 (813) 578-5506</a>
+      <span class="top-bar-sep">|</span>
+      <a href="mailto:mugaremodeling@gmail.com"><i class="fas fa-envelope"></i> mugaremodeling@gmail.com</a>
+      <span class="top-bar-sep">|</span>
+      <span><i class="fas fa-shield-alt"></i> Registered, Insured &amp; Experienced &nbsp;&middot;&nbsp; West Coast Florida</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <div class="container"><div class="header-inner">
+      <a href="index.html" class="logo">
+        <div class="logo-main">Mu<span>Ga</span></div>
+        <div class="logo-sub">Remodeling &amp; Construction</div>
+      </a>
+      <nav><ul class="header-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="services.html">Services</a></li>
+        <li><a href="gallery.html">Gallery</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="reviews.html">Reviews</a></li>
+        <li><a href="areas.html">Areas</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul></nav>
+      <div class="header-cta">
+        <a href="tel:+18135785506" class="header-phone"><i class="fas fa-phone"></i> +1 (813) 578-5506</a>
+        <a href="free-quote.html" class="btn btn-gold active">Free Quote</a>
+      </div>
+      <button class="mobile-toggle" onclick="openMobileNav()" aria-controls="mobileNav" aria-expanded="false" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+    </div></div>
+  </header>
+
+  <!-- SERVICE NAV -->
+  <nav class="service-nav" aria-label="Service navigation">
+    <div class="snav-track">
+      <a class="snav-item" href="services.html#bathroom">Bathroom Remodeling</a><span class="snav-diamond">◆</span>
+      <a class="snav-item" href="services.html#flooring">Floor Tile &amp; Flooring</a><span class="snav-diamond">◆</span>
+      <a class="snav-item" href="services.html#kitchen">Kitchen Remodeling</a><span class="snav-diamond">◆</span>
+      <a class="snav-item" href="services.html#intpaint">Interior Painting</a><span class="snav-diamond">◆</span>
+      <a class="snav-item" href="services.html#extpaint">Exterior Painting</a><span class="snav-diamond">◆</span>
+      <a class="snav-item" href="services.html#backsplash">Backsplash</a><span class="snav-diamond">◆</span>
+      <a class="snav-item" href="services.html#carpentry">Interior Carpentry</a><span class="snav-diamond">◆</span>
+      <a class="snav-item" href="services.html#doors">Doors &amp; Windows</a><span class="snav-diamond">◆</span>
+      <a class="snav-item" href="services.html#drywall">Drywall &amp; Texture</a><span class="snav-diamond">◆</span>
+      <a class="snav-item" href="services.html#fireplace">Fireplace &amp; Accent Walls</a><span class="snav-diamond">◆</span>
+      <a class="snav-item" href="services.html#bathroom">Bathroom Remodeling</a><span class="snav-diamond">◆</span>
+      <a class="snav-item" href="services.html#flooring">Floor Tile &amp; Flooring</a><span class="snav-diamond">◆</span>
+      <a class="snav-item" href="services.html#kitchen">Kitchen Remodeling</a><span class="snav-diamond">◆</span>
+      <a class="snav-item" href="services.html#intpaint">Interior Painting</a><span class="snav-diamond">◆</span>
+      <a class="snav-item" href="services.html#extpaint">Exterior Painting</a><span class="snav-diamond">◆</span>
+      <a class="snav-item" href="services.html#backsplash">Backsplash</a><span class="snav-diamond">◆</span>
+      <a class="snav-item" href="services.html#carpentry">Interior Carpentry</a><span class="snav-diamond">◆</span>
+      <a class="snav-item" href="services.html#doors">Doors &amp; Windows</a><span class="snav-diamond">◆</span>
+      <a class="snav-item" href="services.html#drywall">Drywall &amp; Texture</a><span class="snav-diamond">◆</span>
+      <a class="snav-item" href="services.html#fireplace">Fireplace &amp; Accent Walls</a><span class="snav-diamond">◆</span>
+    </div>
+  </nav>
+
+  <main>
+
+    <!-- HERO -->
+    <div class="fq-hero">
+      <div class="container">
+        <div class="fq-hero-inner reveal">
+          <div class="fq-hero-eyebrow">No Obligation &middot; Always Free</div>
+          <h1 class="fq-hero-title">Book Your Free<br/><em>Remodeling Estimate</em></h1>
+          <p class="fq-hero-sub">Pick a time that works for you. Alejandro or Bryant will personally follow up within 1 hour to discuss your project — zero pressure, zero commitment.</p>
+          <div class="fq-hero-trust">
+            <span><i class="fas fa-shield-alt"></i> Registered &amp; Insured</span>
+            <span><i class="fas fa-star"></i> 5-Star Rated</span>
+            <span><i class="fas fa-clock"></i> 1-Hour Response</span>
+            <span><i class="fas fa-tag"></i> Always Free</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- STATS RIBBON -->
+    <div class="fq-stats-ribbon">
+      <div class="container">
+        <div class="fq-stats-inner">
+          <div class="fq-stat"><div class="fq-stat-num">500+</div><div class="fq-stat-lbl">Projects Delivered</div></div>
+          <div class="fq-stat"><div class="fq-stat-num">5+</div><div class="fq-stat-lbl">Years Experience</div></div>
+          <div class="fq-stat"><div class="fq-stat-num">5.0★</div><div class="fq-stat-lbl">Average Rating</div></div>
+          <div class="fq-stat"><div class="fq-stat-num">1 hr</div><div class="fq-stat-lbl">Response Time</div></div>
+          <div class="fq-stat"><div class="fq-stat-num">100%</div><div class="fq-stat-lbl">Free Estimates</div></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div class="fq-body">
+      <div class="container">
+        <div class="fq-layout">
+
+          <!-- SIDEBAR -->
+          <aside class="fq-sidebar">
+
+            <div class="fq-scard reveal">
+              <div class="fq-scard-title">Talk to the Owners</div>
+              <p class="fq-scard-sub">Prefer to call or email directly? Alejandro &amp; Bryant are available Mon–Sat.</p>
+              <a href="tel:+18135785506" class="fq-contact-btn">
+                <div class="fq-contact-icon"><i class="fas fa-phone"></i></div>
+                <div>
+                  <div class="fq-contact-label">Call Directly</div>
+                  <div class="fq-contact-val">+1 (813) 578-5506</div>
+                </div>
+              </a>
+              <a href="mailto:mugaremodeling@gmail.com" class="fq-contact-btn">
+                <div class="fq-contact-icon"><i class="fas fa-envelope"></i></div>
+                <div>
+                  <div class="fq-contact-label">Email Us</div>
+                  <div class="fq-contact-val" style="font-size:.8rem;">mugaremodeling@gmail.com</div>
+                </div>
+              </a>
+              <div class="fq-trust-list">
+                <div class="fq-trust-item"><i class="fas fa-shield-alt"></i> Registered, Insured &amp; Experienced</div>
+                <div class="fq-trust-item"><i class="fas fa-star"></i> 5+ Years · 500+ Projects</div>
+                <div class="fq-trust-item"><i class="fas fa-check-circle"></i> Quality Guaranteed</div>
+                <div class="fq-trust-item"><i class="fas fa-map-marker-alt"></i> West Coast Florida</div>
+                <div class="fq-trust-item"><i class="fas fa-tag"></i> Free, No-Obligation Estimates</div>
+                <div class="fq-trust-item"><i class="fas fa-clock"></i> Mon–Sat · Fast Response</div>
+              </div>
+            </div>
+
+            <div class="fq-scard reveal">
+              <div class="fq-scard-title">How It Works</div>
+              <p class="fq-scard-sub">Three simple steps to your dream renovation.</p>
+              <div class="fq-steps">
+                <div class="fq-step">
+                  <div class="fq-step-num">1</div>
+                  <div>
+                    <div class="fq-step-title">Book Your Slot</div>
+                    <div class="fq-step-desc">Pick any available time — takes 30 seconds in the calendar below.</div>
+                  </div>
+                </div>
+                <div class="fq-step">
+                  <div class="fq-step-num">2</div>
+                  <div>
+                    <div class="fq-step-title">We Visit Your Home</div>
+                    <div class="fq-step-desc">Alejandro or Bryant meets you on-site and reviews your project in detail.</div>
+                  </div>
+                </div>
+                <div class="fq-step">
+                  <div class="fq-step-num">3</div>
+                  <div>
+                    <div class="fq-step-title">Get Your Estimate</div>
+                    <div class="fq-step-desc">Receive a detailed, itemized quote with zero pressure to commit.</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </aside>
+
+          <!-- CALENDLY WIDGET -->
+          <div class="fq-calendly-wrap reveal">
+            <div class="fq-cal-header">
+              <div class="fq-cal-header-inner">
+                <div class="fq-cal-label">Schedule Online</div>
+                <div class="fq-cal-title">Pick a Time That Works for You</div>
+                <div class="fq-cal-sub">Available Mon–Sat. We confirm within minutes.</div>
+                <div class="fq-cal-badges">
+                  <div class="fq-cal-badge"><i class="fas fa-shield-alt"></i> Registered &amp; Insured</div>
+                  <div class="fq-cal-badge"><i class="fas fa-star"></i> 5-Star Rated</div>
+                  <div class="fq-cal-badge"><i class="fas fa-tag"></i> 100% Free</div>
+                  <div class="fq-cal-badge"><i class="fas fa-clock"></i> 30 min · No obligation</div>
+                </div>
+              </div>
+            </div>
+            <!-- Calendly inline widget -->
+            <div class="calendly-inline-widget"
+                 data-url="https://calendly.com/mugaremodeling/30min?hide_event_type_details=1&hide_gdpr_banner=1&primary_color=ffd200"
+                 style="min-width:320px;height:700px;"></div>
+            <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js" async></script>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- WHY MUGA -->
+    <div class="fq-why">
+      <div class="container">
+        <div class="reveal" style="text-align:center;">
+          <div class="section-eyebrow" style="justify-content:center;">Why MuGa Remodeling</div>
+          <h2 class="section-title" style="text-align:center;">The Standard Every Project <em>Deserves</em></h2>
+          <p class="section-desc" style="margin:0 auto;">Hundreds of homeowners across Tampa Bay trust us because we show up, communicate, and deliver — every time.</p>
+        </div>
+        <div class="fq-why-grid reveal">
+          <div class="fq-why-card">
+            <div class="fq-why-icon"><i class="fas fa-bolt"></i></div>
+            <div class="fq-why-title">Fast Response</div>
+            <div class="fq-why-desc">We reply to every estimate request within 1 hour, Mon–Sat. Your time matters.</div>
+          </div>
+          <div class="fq-why-card">
+            <div class="fq-why-icon"><i class="fas fa-file-invoice-dollar"></i></div>
+            <div class="fq-why-title">Transparent Pricing</div>
+            <div class="fq-why-desc">Itemized estimates — every line explained. No hidden costs, ever.</div>
+          </div>
+          <div class="fq-why-card">
+            <div class="fq-why-icon"><i class="fas fa-award"></i></div>
+            <div class="fq-why-title">Owner-Operated</div>
+            <div class="fq-why-desc">Alejandro &amp; Bryant are personally on every project. Your home is our reputation.</div>
+          </div>
+          <div class="fq-why-card">
+            <div class="fq-why-icon"><i class="fas fa-gem"></i></div>
+            <div class="fq-why-title">Elite Craftsmanship</div>
+            <div class="fq-why-desc">5+ years and 500+ projects across West Coast Florida. Premium finishes, always.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo-main">Mu<span>Ga</span></div>
+          <div class="footer-logo-sub">Remodeling &amp; Construction</div>
+          <p class="footer-brand-desc">Owner-operated luxury remodeling across West Coast Florida. Alejandro Reyes &amp; Bryant Pino — personally invested in every project.</p>
+          <div class="footer-social">
+            <a href="https://www.facebook.com/mugaremodeling" target="_blank" rel="noopener" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="https://www.instagram.com/mugaremodeling" target="_blank" rel="noopener" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Services</div>
+          <ul class="footer-links">
+            <li><a href="services.html#bathroom">Bathroom Remodeling</a></li>
+            <li><a href="services.html#flooring">Floor Tile &amp; Flooring</a></li>
+            <li><a href="services.html#kitchen">Kitchen Remodeling</a></li>
+            <li><a href="services.html#intpaint">Interior Painting</a></li>
+            <li><a href="services.html#extpaint">Exterior Painting</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">More Services</div>
+          <ul class="footer-links">
+            <li><a href="services.html#backsplash">Backsplash</a></li>
+            <li><a href="services.html#carpentry">Interior Carpentry</a></li>
+            <li><a href="services.html#doors">Doors &amp; Windows</a></li>
+            <li><a href="services.html#drywall">Drywall &amp; Texture</a></li>
+            <li><a href="services.html#fireplace">Fireplace &amp; Accent Walls</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Contact</div>
+          <ul class="footer-links">
+            <li><a href="tel:+18135785506"><i class="fas fa-phone" style="color:var(--gold);margin-right:8px;"></i>+1 (813) 578-5506</a></li>
+            <li><a href="mailto:mugaremodeling@gmail.com"><i class="fas fa-envelope" style="color:var(--gold);margin-right:8px;"></i>mugaremodeling@gmail.com</a></li>
+            <li style="color:rgba(255,255,255,.4);font-size:.82rem;">Mon–Sat · West Coast Florida</li>
+            <li style="margin-top:14px;"><a href="free-quote.html" class="btn btn-gold" style="width:100%;justify-content:center;padding:11px 18px;font-size:.74rem;">Book Free Estimate</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 MuGa Remodeling &amp; Construction. All rights reserved.</p>
+        <div class="footer-badges">
+          <div class="footer-badge"><i class="fas fa-shield-alt"></i> Registered, Insured &amp; Experienced</div>
+          <div class="footer-badge"><i class="fas fa-star"></i> 5-Star Rated</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FAB CLUSTER -->
+  <div class="fab-cluster">
+    <a href="tel:+18135785506" class="fab-btn"><i class="fas fa-phone"></i><span>Call Now</span></a>
+    <a href="mailto:mugaremodeling@gmail.com" class="fab-btn"><i class="fas fa-envelope"></i><span>Email</span></a>
+    <a href="free-quote.html" class="fab-btn fab-primary"><i class="fas fa-calendar-alt"></i><span>Free Quote</span></a>
+  </div>
+
+  <!-- MOBILE NAV -->
+  <nav class="mobile-nav" id="mobileNav" aria-hidden="true" role="dialog" aria-label="Navigation menu">
+    <div class="mobile-nav-inner">
+      <div class="mobile-nav-header">
+        <div><div class="mobile-nav-logo">Mu<span>Ga</span></div><span class="mobile-nav-logo-sub">Remodeling &amp; Construction</span></div>
+        <button class="mobile-nav-close" onclick="closeMobileNav()" aria-label="Close menu"><i class="fas fa-times"></i></button>
+      </div>
+      <ul class="mobile-nav-links">
+        <li><a href="index.html" onclick="closeMobileNav()">Home <i class="fas fa-chevron-right"></i></a></li>
+        <li><a href="services.html" onclick="closeMobileNav()">Services <i class="fas fa-chevron-right"></i></a></li>
+        <li><a href="gallery.html" onclick="closeMobileNav()">Gallery <i class="fas fa-chevron-right"></i></a></li>
+        <li><a href="about.html" onclick="closeMobileNav()">About <i class="fas fa-chevron-right"></i></a></li>
+        <li><a href="reviews.html" onclick="closeMobileNav()">Reviews <i class="fas fa-chevron-right"></i></a></li>
+        <li><a href="areas.html" onclick="closeMobileNav()">Areas <i class="fas fa-chevron-right"></i></a></li>
+        <li><a href="contact.html" onclick="closeMobileNav()">Contact <i class="fas fa-chevron-right"></i></a></li>
+      </ul>
+      <div class="mobile-nav-footer">
+        <a href="free-quote.html" class="mobile-nav-cta"><i class="fas fa-calendar-alt"></i> Book Free Estimate</a>
+        <div class="mobile-nav-contact">
+          <a href="tel:+18135785506"><i class="fas fa-phone"></i> Call Now</a>
+          <a href="mailto:mugaremodeling@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+        </div>
+        <div class="mobile-nav-trust"><i class="fas fa-shield-alt"></i> Registered &middot; Insured &middot; 5-Star Rated</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- MOBILE NAV OVERLAY -->
+  <div id="mobileNavOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:1099;opacity:0;transition:opacity .35s;"></div>
+
+  <script src="scripts.js"></script>
+</body>
+</html>

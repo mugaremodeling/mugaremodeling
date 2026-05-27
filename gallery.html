@@ -1,0 +1,1853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <title>Gallery — MuGa Remodeling · West Coast Florida</title>
+  <meta name="description" content="Browse MuGa Remodeling's project gallery — bathroom, kitchen, flooring, painting and more. West Coast Florida." />
+  <link rel="canonical" href="https://mugaremodeling.com/gallery.html" />
+  <meta property="og:title" content="Gallery — MuGa Remodeling" />
+  <meta property="og:description" content="See our completed projects across Tampa Bay. Bathrooms, kitchens, flooring, painting and more." />
+  <meta property="og:image" content="https://mugaremodeling.com/gallery/MuGaLogo.png" />
+  <meta property="og:url" content="https://mugaremodeling.com/gallery.html" />
+  <meta property="og:type" content="website" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="styles.css" />
+  <link rel="icon" type="image/png" href="gallery/MuGaLogo.png" />
+  <link rel="shortcut icon" href="favicon.ico" />
+  <meta name="theme-color" content="#C8960C" />
+  <style>
+    /* ══ GALLERY PAGE ══════════════════════════════════════════════════════════ */
+
+    .gallery-hero {
+      background: var(--text);
+      padding: 56px 0 48px;
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .gallery-hero::before {
+      content: '';
+      position: absolute; top: -40%; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(200,150,12,0.12) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .gallery-hero-inner { position: relative; z-index: 2; }
+    .gallery-hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(200,150,12,0.15); border: 1px solid rgba(200,150,12,0.4);
+      color: var(--gold-light); font-size: 0.65rem; font-weight: 600;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      padding: 7px 18px; border-radius: 100px; margin-bottom: 18px;
+    }
+    .gallery-hero-eyebrow::before {
+      content: ''; width: 6px; height: 6px;
+      background: var(--gold-light); border-radius: 50%;
+      animation: pulseDot 2s ease infinite;
+    }
+    .gallery-hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 4.5vw, 4rem);
+      font-weight: 600; line-height: 1.1; color: #fff; margin-bottom: 12px;
+    }
+    .gallery-hero-title em { font-style: italic; color: var(--gold-light); }
+    .gallery-hero-sub {
+      font-size: 1rem; color: rgba(255,255,255,0.65);
+      max-width: 520px; margin: 0 auto; line-height: 1.8;
+    }
+    .gallery-hero-stats {
+      display: flex; align-items: center; justify-content: center;
+      gap: 40px; margin-top: 28px; flex-wrap: wrap;
+    }
+    .ghs-item { text-align: center; }
+    .ghs-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.8rem; color: var(--gold-light); line-height: 1;
+    }
+    .ghs-lbl {
+      font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase;
+      color: rgba(255,255,255,0.45); margin-top: 2px;
+    }
+
+    /* ── Layout ── */
+    .gallery-layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      gap: 0;
+      min-height: 80vh;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 40px;
+    }
+
+    /* ── Sidebar nav ── */
+    .gallery-nav {
+      padding: 32px 24px 32px 0;
+      position: sticky;
+      top: 76px;
+      height: fit-content;
+      max-height: calc(100vh - 120px);
+      overflow-y: auto;
+    }
+    .gallery-nav::-webkit-scrollbar { width: 3px; }
+    .gallery-nav::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 2px; }
+    .gn-title {
+      font-size: 0.6rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--text-3); margin-bottom: 14px; padding-bottom: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+    .gallery-nav ul { list-style: none; display: flex; flex-direction: column; gap: 3px; }
+    .gn-link {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 12px; border-radius: var(--radius);
+      font-size: 0.78rem; font-weight: 500; color: var(--text-3);
+      transition: all var(--t); text-decoration: none;
+      justify-content: space-between;
+    }
+    .gn-link:hover { color: var(--gold); background: var(--gold-pale); }
+    .gn-link.active { color: var(--gold); background: var(--gold-pale); font-weight: 600; }
+    .gn-link i { font-size: 0.75rem; color: inherit; flex-shrink: 0; width: 16px; }
+    .gn-link-left { display: flex; align-items: center; gap: 10px; }
+    .gn-count {
+      font-size: 0.65rem; font-weight: 700;
+      background: var(--bg-section); color: var(--text-3);
+      padding: 2px 7px; border-radius: 100px;
+      min-width: 24px; text-align: center; flex-shrink: 0;
+    }
+    .gn-link.active .gn-count { background: var(--gold); color: #fff; }
+
+    /* ── Content area ── */
+    .gallery-content {
+      padding: 32px 0 88px 32px;
+      border-left: 1px solid var(--border);
+    }
+
+    /* ── Section ── */
+    .gallery-section {
+      margin-bottom: 72px;
+      scroll-margin-top: 100px;
+    }
+    .gs-header { margin-bottom: 24px; }
+    .gs-title-row {
+      display: flex; align-items: center; gap: 16px;
+    }
+    .gs-icon {
+      width: 48px; height: 48px;
+      background: var(--gold-pale); border: 1px solid var(--gold-border);
+      border-radius: var(--radius-lg);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--gold); font-size: 1.1rem; flex-shrink: 0;
+    }
+    .gs-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem; font-weight: 600; color: var(--text); line-height: 1.2;
+    }
+    .gs-count {
+      font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-3); margin-top: 2px;
+    }
+
+    /* ── Photo grid ── */
+    .gs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 10px;
+    }
+    .gs-item {
+      position: relative; overflow: hidden;
+      aspect-ratio: 4/3; cursor: pointer;
+      background: var(--bg-section);
+      border-radius: var(--radius);
+    }
+    .gs-item img {
+      width: 100%; height: 100%; object-fit: cover;
+      transition: transform 0.5s var(--ease);
+      display: block;
+    }
+    .gs-item:hover img { transform: scale(1.07); }
+    .gs-overlay {
+      position: absolute; inset: 0;
+      background: rgba(26,22,18,0); 
+      display: flex; align-items: center; justify-content: center;
+      transition: background var(--t);
+    }
+    .gs-overlay i {
+      color: #fff; font-size: 1.4rem;
+      opacity: 0; transform: scale(0.7);
+      transition: all var(--t);
+    }
+    .gs-item:hover .gs-overlay { background: rgba(26,22,18,0.4); }
+    .gs-item:hover .gs-overlay i { opacity: 1; transform: scale(1); }
+
+    /* ── Empty state ── */
+    .gs-empty {
+      padding: 56px 32px; text-align: center;
+      background: var(--bg-section); border-radius: var(--radius-lg);
+      border: 1px dashed var(--border-mid);
+    }
+    .gs-empty i { font-size: 2.5rem; color: var(--text-4); margin-bottom: 14px; display: block; }
+    .gs-empty p { font-size: 0.86rem; color: var(--text-3); line-height: 1.7; }
+
+    /* ── Lightbox ── */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(0,0,0,0.95);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .lightbox.open { opacity: 1; pointer-events: all; }
+    .lightbox img {
+      max-width: 92vw; max-height: 88vh;
+      object-fit: contain; border-radius: var(--radius);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.8);
+    }
+    .lb-close {
+      position: absolute; top: 20px; right: 24px;
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,0.1); border: none; cursor: pointer;
+      color: #fff; font-size: 1.2rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: background var(--t);
+    }
+    .lb-close:hover { background: rgba(255,255,255,0.2); }
+    .lb-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 44px; height: 44px; border-radius: 50%;
+      background: rgba(255,255,255,0.1); border: none; cursor: pointer;
+      color: #fff; font-size: 1rem;
+      display: flex; align-items: center; justify-content: center;
+      transition: background var(--t);
+    }
+    .lb-nav:hover { background: rgba(255,255,255,0.2); }
+    .lb-prev { left: 20px; }
+    .lb-next { right: 20px; }
+    .lb-counter {
+      position: absolute; bottom: 20px; left: 50%; transform: translateX(-50%);
+      font-size: 0.75rem; color: rgba(255,255,255,0.5); letter-spacing: 0.1em;
+    }
+
+    /* ── Mobile ── */
+    .gallery-mobile-nav {
+      display: none; padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      background: var(--white); position: sticky; top: 76px; z-index: 50;
+    }
+    .gmn-select {
+      width: 100%; padding: 10px 14px; font-size: 0.85rem;
+      border: 1.5px solid var(--border); border-radius: var(--radius);
+      background: var(--white); color: var(--text);
+      font-family: 'DM Sans', sans-serif; outline: none;
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23A89E94' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat; background-position: right 14px center;
+    }
+
+    @media (max-width: 900px) {
+      .gallery-layout { grid-template-columns: 1fr; padding: 0 20px; }
+      .gallery-nav { display: none; }
+      .gallery-content { padding: 24px 0 64px; border-left: none; }
+      .gallery-mobile-nav { display: block; }
+      .gs-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 7px; }
+    }
+    @media (max-width: 480px) {
+      .gs-grid { grid-template-columns: repeat(2, 1fr); gap: 5px; }
+      .gallery-hero-stats { gap: 24px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- TOP BAR -->
+  <div class="top-bar">
+    <div class="top-bar-inner">
+      <a href="tel:0000000000"><i class="fas fa-phone"></i> 000-000-0000</a>
+      <span class="top-bar-sep">|</span>
+      <a href="mailto:mugaremodeling@gmail.com"><i class="fas fa-envelope"></i> mugaremodeling@gmail.com</a>
+      <span class="top-bar-sep">|</span>
+      <span><i class="fas fa-shield-alt"></i> Registered, Insured &amp; Experienced — Mon–Sat · West Coast Florida</span>
+    </div>
+  </div>
+
+  <!-- HEADER -->
+  <header class="site-header" id="siteHeader">
+    <div class="container">
+      <div class="header-inner">
+        <a href="index.html" class="logo">
+          <div class="logo-main">Mu<span>Ga</span></div>
+          <div class="logo-sub">Remodeling &amp; Construction</div>
+        </a>
+        <nav>
+          <ul class="header-nav">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="gallery.html" class="active">Gallery</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="reviews.html">Reviews</a></li>
+            <li><a href="areas.html">Areas</a></li>
+            <li><a href="contact.html">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="header-cta">
+          <a href="tel:0000000000" class="header-phone"><i class="fas fa-phone"></i> 000-000-0000</a>
+          <a href="free-quote.html" class="btn btn-gold">Free Quote</a>
+        </div>
+        <button class="mobile-toggle" onclick="openMobileNav()" aria-controls="mobileNav" aria-expanded="false" aria-label="Open menu"><i class="fas fa-bars"></i></button>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO -->
+  <div class="gallery-hero">
+    <div class="container gallery-hero-inner">
+      <div class="gallery-hero-eyebrow">Our Work</div>
+      <h1 class="gallery-hero-title">Real Projects. <em>Real Results.</em></h1>
+      <p class="gallery-hero-sub">Browse our portfolio of completed projects across West Coast Florida — every photo is a home we're proud to have transformed.</p>
+      <div class="gallery-hero-stats">
+        <div class="ghs-item"><div class="ghs-num">100</div><div class="ghs-lbl">Photos</div></div>
+        <div class="ghs-item"><div class="ghs-num">10+</div><div class="ghs-lbl">Service Types</div></div>
+        <div class="ghs-item"><div class="ghs-num">500+</div><div class="ghs-lbl">Projects Done</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MOBILE NAV SELECT -->
+  <div class="gallery-mobile-nav">
+    <select class="gmn-select" onchange="document.getElementById(this.value).scrollIntoView({behavior:'smooth', block:'start'})">
+      <option value="section-general">All Projects (100 photos)</option>
+      <option value="section-bathroom">  Bathroom Remodeling (63 photos)</option>      <option value="section-kitchen">  Kitchen Remodeling (22 photos)</option>      <option value="section-flooring">  Floor Tile & Flooring (25 photos)</option>      <option value="section-interior-painting">  Interior Painting (5 photos)</option>      <option value="section-exterior-painting">  Exterior Painting (11 photos)</option>      <option value="section-backsplash">  Backsplash (22 photos)</option>      <option value="section-carpentry">  Interior Carpentry (7 photos)</option>      <option value="section-doors-windows">  Doors & Windows (5 photos)</option>      <option value="section-drywall-texture">  Drywall & Texture (13 photos)</option>      <option value="section-fireplace-accent-walls">  Fireplace & Accent Walls (5 photos)</option>
+    </select>
+  </div>
+
+  <main>
+    <div class="gallery-layout">
+
+      <!-- SIDEBAR NAV -->
+      <aside class="gallery-nav">
+        <div class="gn-title">Browse by Category</div>
+        <ul>
+      <li><a href="#section-general" class="gn-link active" data-target="section-general">
+        <i class="fas fa-images"></i> All Projects
+        <span class="gn-count">100</span>
+      </a></li>
+      <li><a href="#section-bathroom" class="gn-link" data-target="section-bathroom">
+        <i class="fas fa-bath"></i> Bathroom Remodeling
+        <span class="gn-count">63</span>
+      </a></li>
+      <li><a href="#section-kitchen" class="gn-link" data-target="section-kitchen">
+        <i class="fas fa-utensils"></i> Kitchen Remodeling
+        <span class="gn-count">22</span>
+      </a></li>
+      <li><a href="#section-flooring" class="gn-link" data-target="section-flooring">
+        <i class="fas fa-border-all"></i> Floor Tile & Flooring
+        <span class="gn-count">25</span>
+      </a></li>
+      <li><a href="#section-interior-painting" class="gn-link" data-target="section-interior-painting">
+        <i class="fas fa-paint-roller"></i> Interior Painting
+        <span class="gn-count">5</span>
+      </a></li>
+      <li><a href="#section-exterior-painting" class="gn-link" data-target="section-exterior-painting">
+        <i class="fas fa-home"></i> Exterior Painting
+        <span class="gn-count">11</span>
+      </a></li>
+      <li><a href="#section-backsplash" class="gn-link" data-target="section-backsplash">
+        <i class="fas fa-th-large"></i> Backsplash
+        <span class="gn-count">22</span>
+      </a></li>
+      <li><a href="#section-carpentry" class="gn-link" data-target="section-carpentry">
+        <i class="fas fa-hammer"></i> Interior Carpentry
+        <span class="gn-count">7</span>
+      </a></li>
+      <li><a href="#section-doors-windows" class="gn-link" data-target="section-doors-windows">
+        <i class="fas fa-door-open"></i> Doors & Windows
+        <span class="gn-count">5</span>
+      </a></li>
+      <li><a href="#section-drywall-texture" class="gn-link" data-target="section-drywall-texture">
+        <i class="fas fa-layer-group"></i> Drywall & Texture
+        <span class="gn-count">13</span>
+      </a></li>
+      <li><a href="#section-fireplace-accent-walls" class="gn-link" data-target="section-fireplace-accent-walls">
+        <i class="fas fa-fire"></i> Fireplace & Accent Walls
+        <span class="gn-count">5</span>
+      </a></li>
+        </ul>
+      </aside>
+
+      <!-- CONTENT -->
+      <div class="gallery-content">
+
+  <!-- ═══ ALL PROJECTS ═══ -->
+  <section class="gallery-section" id="section-general">
+    <div class="gs-header">
+      <div class="gs-title-row">
+        <div class="gs-icon"><i class="fas fa-images"></i></div>
+        <div>
+          <h2 class="gs-title">All Projects</h2>
+          <div class="gs-count">100 photos</div>
+        </div>
+      </div>
+    </div>
+    <div class="gs-grid">
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.05%20PM%20%281%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.05%20PM%20%281%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.05%20PM%20%282%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.05%20PM%20%282%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.05%20PM%20%283%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.05%20PM%20%283%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.05%20PM%20%284%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.05%20PM%20%284%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.05%20PM%20%285%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.05%20PM%20%285%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.05%20PM%20%286%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.05%20PM%20%286%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.05%20PM%20%287%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.05%20PM%20%287%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.05%20PM%20%288%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.05%20PM%20%288%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.05%20PM.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.05%20PM.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.06%20PM%20%281%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.06%20PM%20%281%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.06%20PM%20%282%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.06%20PM%20%282%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.06%20PM%20%283%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.06%20PM%20%283%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.06%20PM%20%284%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.06%20PM%20%284%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.06%20PM%20%285%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.06%20PM%20%285%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.06%20PM%20%286%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.06%20PM%20%286%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.06%20PM%20%287%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.06%20PM%20%287%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.06%20PM.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.06%20PM.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.07%20PM%20%281%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.07%20PM%20%281%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.07%20PM%20%282%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.07%20PM%20%282%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.07%20PM%20%283%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.07%20PM%20%283%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.07%20PM%20%284%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.07%20PM%20%284%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.07%20PM%20%285%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.07%20PM%20%285%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.07%20PM%20%286%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.07%20PM%20%286%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.07%20PM%20%287%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.07%20PM%20%287%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.07%20PM.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.07%20PM.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.08%20PM.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.08%20PM.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.09%20PM%20%281%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.09%20PM%20%281%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.09%20PM.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.09%20PM.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.10%20PM%20%281%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.10%20PM%20%281%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.10%20PM%20%282%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.10%20PM%20%282%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.10%20PM.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.10%20PM.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.14%20PM%20%281%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.14%20PM%20%281%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.14%20PM%20%282%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.14%20PM%20%282%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.14%20PM%20%283%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.14%20PM%20%283%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.14%20PM%20%284%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.14%20PM%20%284%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.14%20PM%20%285%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.14%20PM%20%285%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.14%20PM.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.14%20PM.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.15%20PM%20%281%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.15%20PM%20%281%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.15%20PM%20%282%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.15%20PM%20%282%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.15%20PM%20%283%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.15%20PM%20%283%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.15%20PM%20%284%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.15%20PM%20%284%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.15%20PM%20%285%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.15%20PM%20%285%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.15%20PM%20%286%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.15%20PM%20%286%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.15%20PM%20%287%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.15%20PM%20%287%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.15%20PM%20%288%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.15%20PM%20%288%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.15%20PM.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.15%20PM.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.16%20PM%20%281%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.16%20PM%20%281%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.16%20PM%20%282%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.16%20PM%20%282%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.16%20PM%20%283%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.16%20PM%20%283%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.16%20PM%20%284%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.16%20PM%20%284%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.16%20PM%20%285%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.16%20PM%20%285%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.16%20PM%20%286%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.16%20PM%20%286%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.16%20PM%20%287%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.16%20PM%20%287%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.16%20PM.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.16%20PM.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.17%20PM%20%281%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.17%20PM%20%281%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.17%20PM%20%282%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.17%20PM%20%282%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.17%20PM%20%283%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.17%20PM%20%283%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.17%20PM%20%284%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.17%20PM%20%284%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.17%20PM.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.17%20PM.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.18%20PM%20%281%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.18%20PM%20%281%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.18%20PM%20%282%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.18%20PM%20%282%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.18%20PM%20%283%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.18%20PM%20%283%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.18%20PM%20%284%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.18%20PM%20%284%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.18%20PM%20%285%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.18%20PM%20%285%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.18%20PM%20%286%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.18%20PM%20%286%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.18%20PM%20%287%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.18%20PM%20%287%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.18%20PM%20%288%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.18%20PM%20%288%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.18%20PM.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.18%20PM.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.19%20PM%20%281%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.19%20PM%20%281%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.19%20PM%20%282%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.19%20PM%20%282%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.19%20PM%20%283%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.19%20PM%20%283%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.19%20PM%20%284%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.19%20PM%20%284%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.19%20PM%20%285%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.19%20PM%20%285%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.19%20PM%20%286%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.19%20PM%20%286%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.19%20PM%20%287%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.19%20PM%20%287%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.19%20PM.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.19%20PM.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.20%20PM%20%281%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.20%20PM%20%281%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.20%20PM%20%282%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.20%20PM%20%282%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.20%20PM%20%283%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.20%20PM%20%283%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.20%20PM%20%284%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.20%20PM%20%284%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.20%20PM%20%285%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.20%20PM%20%285%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.20%20PM%20%286%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.20%20PM%20%286%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.20%20PM%20%287%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.20%20PM%20%287%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.20%20PM.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.20%20PM.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.21%20PM%20%281%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.21%20PM%20%281%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.21%20PM%20%282%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.21%20PM%20%282%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.21%20PM%20%283%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.21%20PM%20%283%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.21%20PM%20%284%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.21%20PM%20%284%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.21%20PM%20%285%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.21%20PM%20%285%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.21%20PM%20%286%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.21%20PM%20%286%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.21%20PM%20%287%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.21%20PM%20%287%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.21%20PM.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.21%20PM.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.22%20PM%20%281%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.22%20PM%20%281%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.22%20PM%20%282%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.22%20PM%20%282%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.22%20PM%20%283%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.22%20PM%20%283%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.22%20PM%20%284%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.22%20PM%20%284%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.22%20PM%20%285%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.22%20PM%20%285%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.22%20PM%20%286%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.22%20PM%20%286%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.22%20PM%20%287%29.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.22%20PM%20%287%29.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.22%20PM.jpeg', 'MuGa Remodeling — All Projects')">
+        <img loading="lazy" src="gallery/general/WhatsApp%20Image%202026-05-21%20at%206.26.22%20PM.jpeg" alt="MuGa Remodeling — All Projects" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══ BATHROOM REMODELING ═══ -->
+  <section class="gallery-section" id="section-bathroom">
+    <div class="gs-header">
+      <div class="gs-title-row">
+        <div class="gs-icon"><i class="fas fa-bath"></i></div>
+        <div>
+          <h2 class="gs-title">Bathroom Remodeling</h2>
+          <div class="gs-count">63 photos</div>
+        </div>
+      </div>
+    </div>
+    <div class="gs-grid">
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash14.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash14.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash15.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash15.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash16.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash16.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash17.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash17.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash18.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash18.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash19.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash19.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash20.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash20.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash21.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash21.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash22.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash22.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash23.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash23.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash25.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash25.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash26.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash26.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash27.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash27.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash29.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash29.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash30.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash30.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash31.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash31.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash32.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash32.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash33.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash33.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash34.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash34.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash35.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash35.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash36.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash36.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash41.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash41.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash42.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash42.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash43.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash43.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash44.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash44.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash46.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash46.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash47.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash47.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash48.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash48.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash51.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash51.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash53.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash53.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash54.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash54.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash57.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash57.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash59.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash59.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash61.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash61.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash62.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash62.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash63.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash63.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash64.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash64.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash67.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash67.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash68.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash68.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash76.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash76.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash77.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash77.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash78.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash78.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash79.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash79.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash80.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash80.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash83.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash83.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash84.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash84.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash90.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash90.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash94.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash94.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash95.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash95.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash96.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash96.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/backsplash97.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/backsplash97.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/piso100.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/piso100.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/piso103.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/piso103.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/piso104.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/piso104.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/piso61.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/piso61.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/piso62.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/piso62.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/piso63.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/piso63.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/piso69.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/piso69.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/piso71.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/piso71.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/piso74.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/piso74.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/piso97.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/piso97.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/piso98.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/piso98.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/bathroom/piso99.jpg', 'MuGa Remodeling — Bathroom Remodeling')">
+        <img loading="lazy" src="gallery/bathroom/piso99.jpg" alt="MuGa Remodeling — Bathroom Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ KITCHEN REMODELING ═══ -->
+  <section class="gallery-section" id="section-kitchen">
+    <div class="gs-header">
+      <div class="gs-title-row">
+        <div class="gs-icon"><i class="fas fa-utensils"></i></div>
+        <div>
+          <h2 class="gs-title">Kitchen Remodeling</h2>
+          <div class="gs-count">22 photos</div>
+        </div>
+      </div>
+    </div>
+    <div class="gs-grid">
+      <div class="gs-item" onclick="openLightbox('gallery/kitchen/backsplash1.jpg', 'MuGa Remodeling — Kitchen Remodeling')">
+        <img loading="lazy" src="gallery/kitchen/backsplash1.jpg" alt="MuGa Remodeling — Kitchen Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/kitchen/backsplash10.jpg', 'MuGa Remodeling — Kitchen Remodeling')">
+        <img loading="lazy" src="gallery/kitchen/backsplash10.jpg" alt="MuGa Remodeling — Kitchen Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/kitchen/backsplash100.jpg', 'MuGa Remodeling — Kitchen Remodeling')">
+        <img loading="lazy" src="gallery/kitchen/backsplash100.jpg" alt="MuGa Remodeling — Kitchen Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/kitchen/backsplash102.jpg', 'MuGa Remodeling — Kitchen Remodeling')">
+        <img loading="lazy" src="gallery/kitchen/backsplash102.jpg" alt="MuGa Remodeling — Kitchen Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/kitchen/backsplash103.jpg', 'MuGa Remodeling — Kitchen Remodeling')">
+        <img loading="lazy" src="gallery/kitchen/backsplash103.jpg" alt="MuGa Remodeling — Kitchen Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/kitchen/backsplash105.jpg', 'MuGa Remodeling — Kitchen Remodeling')">
+        <img loading="lazy" src="gallery/kitchen/backsplash105.jpg" alt="MuGa Remodeling — Kitchen Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/kitchen/backsplash106.jpg', 'MuGa Remodeling — Kitchen Remodeling')">
+        <img loading="lazy" src="gallery/kitchen/backsplash106.jpg" alt="MuGa Remodeling — Kitchen Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/kitchen/backsplash107.jpg', 'MuGa Remodeling — Kitchen Remodeling')">
+        <img loading="lazy" src="gallery/kitchen/backsplash107.jpg" alt="MuGa Remodeling — Kitchen Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/kitchen/backsplash108.jpg', 'MuGa Remodeling — Kitchen Remodeling')">
+        <img loading="lazy" src="gallery/kitchen/backsplash108.jpg" alt="MuGa Remodeling — Kitchen Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/kitchen/backsplash109.jpg', 'MuGa Remodeling — Kitchen Remodeling')">
+        <img loading="lazy" src="gallery/kitchen/backsplash109.jpg" alt="MuGa Remodeling — Kitchen Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/kitchen/backsplash11.jpg', 'MuGa Remodeling — Kitchen Remodeling')">
+        <img loading="lazy" src="gallery/kitchen/backsplash11.jpg" alt="MuGa Remodeling — Kitchen Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/kitchen/backsplash110.jpg', 'MuGa Remodeling — Kitchen Remodeling')">
+        <img loading="lazy" src="gallery/kitchen/backsplash110.jpg" alt="MuGa Remodeling — Kitchen Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/kitchen/backsplash12.jpg', 'MuGa Remodeling — Kitchen Remodeling')">
+        <img loading="lazy" src="gallery/kitchen/backsplash12.jpg" alt="MuGa Remodeling — Kitchen Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/kitchen/backsplash2.jpg', 'MuGa Remodeling — Kitchen Remodeling')">
+        <img loading="lazy" src="gallery/kitchen/backsplash2.jpg" alt="MuGa Remodeling — Kitchen Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/kitchen/backsplash3.jpg', 'MuGa Remodeling — Kitchen Remodeling')">
+        <img loading="lazy" src="gallery/kitchen/backsplash3.jpg" alt="MuGa Remodeling — Kitchen Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/kitchen/backsplash4.jpg', 'MuGa Remodeling — Kitchen Remodeling')">
+        <img loading="lazy" src="gallery/kitchen/backsplash4.jpg" alt="MuGa Remodeling — Kitchen Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/kitchen/backsplash5.jpg', 'MuGa Remodeling — Kitchen Remodeling')">
+        <img loading="lazy" src="gallery/kitchen/backsplash5.jpg" alt="MuGa Remodeling — Kitchen Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/kitchen/backsplash6.jpg', 'MuGa Remodeling — Kitchen Remodeling')">
+        <img loading="lazy" src="gallery/kitchen/backsplash6.jpg" alt="MuGa Remodeling — Kitchen Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/kitchen/backsplash7.jpg', 'MuGa Remodeling — Kitchen Remodeling')">
+        <img loading="lazy" src="gallery/kitchen/backsplash7.jpg" alt="MuGa Remodeling — Kitchen Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/kitchen/backsplash8.jpg', 'MuGa Remodeling — Kitchen Remodeling')">
+        <img loading="lazy" src="gallery/kitchen/backsplash8.jpg" alt="MuGa Remodeling — Kitchen Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/kitchen/backsplash9.jpg', 'MuGa Remodeling — Kitchen Remodeling')">
+        <img loading="lazy" src="gallery/kitchen/backsplash9.jpg" alt="MuGa Remodeling — Kitchen Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/kitchen/backsplash99.jpg', 'MuGa Remodeling — Kitchen Remodeling')">
+        <img loading="lazy" src="gallery/kitchen/backsplash99.jpg" alt="MuGa Remodeling — Kitchen Remodeling" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FLOOR TILE & FLOORING ═══ -->
+  <section class="gallery-section" id="section-flooring">
+    <div class="gs-header">
+      <div class="gs-title-row">
+        <div class="gs-icon"><i class="fas fa-border-all"></i></div>
+        <div>
+          <h2 class="gs-title">Floor Tile & Flooring</h2>
+          <div class="gs-count">25 photos</div>
+        </div>
+      </div>
+    </div>
+    <div class="gs-grid">
+      <div class="gs-item" onclick="openLightbox('gallery/flooring/piso1.jpg', 'MuGa Remodeling — Floor Tile & Flooring')">
+        <img loading="lazy" src="gallery/flooring/piso1.jpg" alt="MuGa Remodeling — Floor Tile & Flooring" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/flooring/piso10.jpg', 'MuGa Remodeling — Floor Tile & Flooring')">
+        <img loading="lazy" src="gallery/flooring/piso10.jpg" alt="MuGa Remodeling — Floor Tile & Flooring" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/flooring/piso11.jpg', 'MuGa Remodeling — Floor Tile & Flooring')">
+        <img loading="lazy" src="gallery/flooring/piso11.jpg" alt="MuGa Remodeling — Floor Tile & Flooring" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/flooring/piso12.jpg', 'MuGa Remodeling — Floor Tile & Flooring')">
+        <img loading="lazy" src="gallery/flooring/piso12.jpg" alt="MuGa Remodeling — Floor Tile & Flooring" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/flooring/piso13.jpg', 'MuGa Remodeling — Floor Tile & Flooring')">
+        <img loading="lazy" src="gallery/flooring/piso13.jpg" alt="MuGa Remodeling — Floor Tile & Flooring" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/flooring/piso14.jpg', 'MuGa Remodeling — Floor Tile & Flooring')">
+        <img loading="lazy" src="gallery/flooring/piso14.jpg" alt="MuGa Remodeling — Floor Tile & Flooring" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/flooring/piso15.jpg', 'MuGa Remodeling — Floor Tile & Flooring')">
+        <img loading="lazy" src="gallery/flooring/piso15.jpg" alt="MuGa Remodeling — Floor Tile & Flooring" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/flooring/piso16.jpg', 'MuGa Remodeling — Floor Tile & Flooring')">
+        <img loading="lazy" src="gallery/flooring/piso16.jpg" alt="MuGa Remodeling — Floor Tile & Flooring" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/flooring/piso17.jpg', 'MuGa Remodeling — Floor Tile & Flooring')">
+        <img loading="lazy" src="gallery/flooring/piso17.jpg" alt="MuGa Remodeling — Floor Tile & Flooring" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/flooring/piso2.jpg', 'MuGa Remodeling — Floor Tile & Flooring')">
+        <img loading="lazy" src="gallery/flooring/piso2.jpg" alt="MuGa Remodeling — Floor Tile & Flooring" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/flooring/piso21.jpg', 'MuGa Remodeling — Floor Tile & Flooring')">
+        <img loading="lazy" src="gallery/flooring/piso21.jpg" alt="MuGa Remodeling — Floor Tile & Flooring" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/flooring/piso25.jpg', 'MuGa Remodeling — Floor Tile & Flooring')">
+        <img loading="lazy" src="gallery/flooring/piso25.jpg" alt="MuGa Remodeling — Floor Tile & Flooring" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/flooring/piso26.jpg', 'MuGa Remodeling — Floor Tile & Flooring')">
+        <img loading="lazy" src="gallery/flooring/piso26.jpg" alt="MuGa Remodeling — Floor Tile & Flooring" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/flooring/piso27.jpg', 'MuGa Remodeling — Floor Tile & Flooring')">
+        <img loading="lazy" src="gallery/flooring/piso27.jpg" alt="MuGa Remodeling — Floor Tile & Flooring" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/flooring/piso28.jpg', 'MuGa Remodeling — Floor Tile & Flooring')">
+        <img loading="lazy" src="gallery/flooring/piso28.jpg" alt="MuGa Remodeling — Floor Tile & Flooring" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/flooring/piso29.jpg', 'MuGa Remodeling — Floor Tile & Flooring')">
+        <img loading="lazy" src="gallery/flooring/piso29.jpg" alt="MuGa Remodeling — Floor Tile & Flooring" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/flooring/piso3.jpg', 'MuGa Remodeling — Floor Tile & Flooring')">
+        <img loading="lazy" src="gallery/flooring/piso3.jpg" alt="MuGa Remodeling — Floor Tile & Flooring" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/flooring/piso30.jpg', 'MuGa Remodeling — Floor Tile & Flooring')">
+        <img loading="lazy" src="gallery/flooring/piso30.jpg" alt="MuGa Remodeling — Floor Tile & Flooring" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/flooring/piso31.jpg', 'MuGa Remodeling — Floor Tile & Flooring')">
+        <img loading="lazy" src="gallery/flooring/piso31.jpg" alt="MuGa Remodeling — Floor Tile & Flooring" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/flooring/piso4.jpg', 'MuGa Remodeling — Floor Tile & Flooring')">
+        <img loading="lazy" src="gallery/flooring/piso4.jpg" alt="MuGa Remodeling — Floor Tile & Flooring" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/flooring/piso5.jpg', 'MuGa Remodeling — Floor Tile & Flooring')">
+        <img loading="lazy" src="gallery/flooring/piso5.jpg" alt="MuGa Remodeling — Floor Tile & Flooring" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/flooring/piso6.jpg', 'MuGa Remodeling — Floor Tile & Flooring')">
+        <img loading="lazy" src="gallery/flooring/piso6.jpg" alt="MuGa Remodeling — Floor Tile & Flooring" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/flooring/piso7.jpg', 'MuGa Remodeling — Floor Tile & Flooring')">
+        <img loading="lazy" src="gallery/flooring/piso7.jpg" alt="MuGa Remodeling — Floor Tile & Flooring" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/flooring/piso8.jpg', 'MuGa Remodeling — Floor Tile & Flooring')">
+        <img loading="lazy" src="gallery/flooring/piso8.jpg" alt="MuGa Remodeling — Floor Tile & Flooring" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/flooring/piso9.jpg', 'MuGa Remodeling — Floor Tile & Flooring')">
+        <img loading="lazy" src="gallery/flooring/piso9.jpg" alt="MuGa Remodeling — Floor Tile & Flooring" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ INTERIOR PAINTING ═══ -->
+  <section class="gallery-section" id="section-interior-painting">
+    <div class="gs-header">
+      <div class="gs-title-row">
+        <div class="gs-icon"><i class="fas fa-paint-roller"></i></div>
+        <div>
+          <h2 class="gs-title">Interior Painting</h2>
+          <div class="gs-count">5 photos</div>
+        </div>
+      </div>
+    </div>
+    <div class="gs-grid">
+      <div class="gs-item" onclick="openLightbox('gallery/interior-painting/drywall19.jpg', 'MuGa Remodeling — Interior Painting')">
+        <img loading="lazy" src="gallery/interior-painting/drywall19.jpg" alt="MuGa Remodeling — Interior Painting" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/interior-painting/pintura1.jpg', 'MuGa Remodeling — Interior Painting')">
+        <img loading="lazy" src="gallery/interior-painting/pintura1.jpg" alt="MuGa Remodeling — Interior Painting" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/interior-painting/pintura2.jpg', 'MuGa Remodeling — Interior Painting')">
+        <img loading="lazy" src="gallery/interior-painting/pintura2.jpg" alt="MuGa Remodeling — Interior Painting" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/interior-painting/pintura3.jpg', 'MuGa Remodeling — Interior Painting')">
+        <img loading="lazy" src="gallery/interior-painting/pintura3.jpg" alt="MuGa Remodeling — Interior Painting" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/interior-painting/pintura4.jpg', 'MuGa Remodeling — Interior Painting')">
+        <img loading="lazy" src="gallery/interior-painting/pintura4.jpg" alt="MuGa Remodeling — Interior Painting" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ EXTERIOR PAINTING ═══ -->
+  <section class="gallery-section" id="section-exterior-painting">
+    <div class="gs-header">
+      <div class="gs-title-row">
+        <div class="gs-icon"><i class="fas fa-home"></i></div>
+        <div>
+          <h2 class="gs-title">Exterior Painting</h2>
+          <div class="gs-count">11 photos</div>
+        </div>
+      </div>
+    </div>
+    <div class="gs-grid">
+      <div class="gs-item" onclick="openLightbox('gallery/exterior-painting/puerta14.jpg', 'MuGa Remodeling — Exterior Painting')">
+        <img loading="lazy" src="gallery/exterior-painting/puerta14.jpg" alt="MuGa Remodeling — Exterior Painting" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/exterior-painting/puerta15.jpg', 'MuGa Remodeling — Exterior Painting')">
+        <img loading="lazy" src="gallery/exterior-painting/puerta15.jpg" alt="MuGa Remodeling — Exterior Painting" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/exterior-painting/puerta16.jpg', 'MuGa Remodeling — Exterior Painting')">
+        <img loading="lazy" src="gallery/exterior-painting/puerta16.jpg" alt="MuGa Remodeling — Exterior Painting" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/exterior-painting/puerta17.jpg', 'MuGa Remodeling — Exterior Painting')">
+        <img loading="lazy" src="gallery/exterior-painting/puerta17.jpg" alt="MuGa Remodeling — Exterior Painting" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/exterior-painting/puerta18.jpg', 'MuGa Remodeling — Exterior Painting')">
+        <img loading="lazy" src="gallery/exterior-painting/puerta18.jpg" alt="MuGa Remodeling — Exterior Painting" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/exterior-painting/puerta19.jpg', 'MuGa Remodeling — Exterior Painting')">
+        <img loading="lazy" src="gallery/exterior-painting/puerta19.jpg" alt="MuGa Remodeling — Exterior Painting" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/exterior-painting/puerta20.jpg', 'MuGa Remodeling — Exterior Painting')">
+        <img loading="lazy" src="gallery/exterior-painting/puerta20.jpg" alt="MuGa Remodeling — Exterior Painting" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/exterior-painting/puerta21.jpg', 'MuGa Remodeling — Exterior Painting')">
+        <img loading="lazy" src="gallery/exterior-painting/puerta21.jpg" alt="MuGa Remodeling — Exterior Painting" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/exterior-painting/puerta22.jpg', 'MuGa Remodeling — Exterior Painting')">
+        <img loading="lazy" src="gallery/exterior-painting/puerta22.jpg" alt="MuGa Remodeling — Exterior Painting" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/exterior-painting/puerta23.jpg', 'MuGa Remodeling — Exterior Painting')">
+        <img loading="lazy" src="gallery/exterior-painting/puerta23.jpg" alt="MuGa Remodeling — Exterior Painting" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/exterior-painting/puerta24.jpg', 'MuGa Remodeling — Exterior Painting')">
+        <img loading="lazy" src="gallery/exterior-painting/puerta24.jpg" alt="MuGa Remodeling — Exterior Painting" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ BACKSPLASH ═══ -->
+  <section class="gallery-section" id="section-backsplash">
+    <div class="gs-header">
+      <div class="gs-title-row">
+        <div class="gs-icon"><i class="fas fa-th-large"></i></div>
+        <div>
+          <h2 class="gs-title">Backsplash</h2>
+          <div class="gs-count">22 photos</div>
+        </div>
+      </div>
+    </div>
+    <div class="gs-grid">
+      <div class="gs-item" onclick="openLightbox('gallery/backsplash/backsplash1.jpg', 'MuGa Remodeling — Backsplash')">
+        <img loading="lazy" src="gallery/backsplash/backsplash1.jpg" alt="MuGa Remodeling — Backsplash" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/backsplash/backsplash10.jpg', 'MuGa Remodeling — Backsplash')">
+        <img loading="lazy" src="gallery/backsplash/backsplash10.jpg" alt="MuGa Remodeling — Backsplash" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/backsplash/backsplash100.jpg', 'MuGa Remodeling — Backsplash')">
+        <img loading="lazy" src="gallery/backsplash/backsplash100.jpg" alt="MuGa Remodeling — Backsplash" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/backsplash/backsplash102.jpg', 'MuGa Remodeling — Backsplash')">
+        <img loading="lazy" src="gallery/backsplash/backsplash102.jpg" alt="MuGa Remodeling — Backsplash" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/backsplash/backsplash103.jpg', 'MuGa Remodeling — Backsplash')">
+        <img loading="lazy" src="gallery/backsplash/backsplash103.jpg" alt="MuGa Remodeling — Backsplash" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/backsplash/backsplash105.jpg', 'MuGa Remodeling — Backsplash')">
+        <img loading="lazy" src="gallery/backsplash/backsplash105.jpg" alt="MuGa Remodeling — Backsplash" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/backsplash/backsplash106.jpg', 'MuGa Remodeling — Backsplash')">
+        <img loading="lazy" src="gallery/backsplash/backsplash106.jpg" alt="MuGa Remodeling — Backsplash" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/backsplash/backsplash107.jpg', 'MuGa Remodeling — Backsplash')">
+        <img loading="lazy" src="gallery/backsplash/backsplash107.jpg" alt="MuGa Remodeling — Backsplash" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/backsplash/backsplash108.jpg', 'MuGa Remodeling — Backsplash')">
+        <img loading="lazy" src="gallery/backsplash/backsplash108.jpg" alt="MuGa Remodeling — Backsplash" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/backsplash/backsplash109.jpg', 'MuGa Remodeling — Backsplash')">
+        <img loading="lazy" src="gallery/backsplash/backsplash109.jpg" alt="MuGa Remodeling — Backsplash" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/backsplash/backsplash11.jpg', 'MuGa Remodeling — Backsplash')">
+        <img loading="lazy" src="gallery/backsplash/backsplash11.jpg" alt="MuGa Remodeling — Backsplash" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/backsplash/backsplash110.jpg', 'MuGa Remodeling — Backsplash')">
+        <img loading="lazy" src="gallery/backsplash/backsplash110.jpg" alt="MuGa Remodeling — Backsplash" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/backsplash/backsplash12.jpg', 'MuGa Remodeling — Backsplash')">
+        <img loading="lazy" src="gallery/backsplash/backsplash12.jpg" alt="MuGa Remodeling — Backsplash" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/backsplash/backsplash2.jpg', 'MuGa Remodeling — Backsplash')">
+        <img loading="lazy" src="gallery/backsplash/backsplash2.jpg" alt="MuGa Remodeling — Backsplash" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/backsplash/backsplash3.jpg', 'MuGa Remodeling — Backsplash')">
+        <img loading="lazy" src="gallery/backsplash/backsplash3.jpg" alt="MuGa Remodeling — Backsplash" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/backsplash/backsplash4.jpg', 'MuGa Remodeling — Backsplash')">
+        <img loading="lazy" src="gallery/backsplash/backsplash4.jpg" alt="MuGa Remodeling — Backsplash" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/backsplash/backsplash5.jpg', 'MuGa Remodeling — Backsplash')">
+        <img loading="lazy" src="gallery/backsplash/backsplash5.jpg" alt="MuGa Remodeling — Backsplash" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/backsplash/backsplash6.jpg', 'MuGa Remodeling — Backsplash')">
+        <img loading="lazy" src="gallery/backsplash/backsplash6.jpg" alt="MuGa Remodeling — Backsplash" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/backsplash/backsplash7.jpg', 'MuGa Remodeling — Backsplash')">
+        <img loading="lazy" src="gallery/backsplash/backsplash7.jpg" alt="MuGa Remodeling — Backsplash" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/backsplash/backsplash8.jpg', 'MuGa Remodeling — Backsplash')">
+        <img loading="lazy" src="gallery/backsplash/backsplash8.jpg" alt="MuGa Remodeling — Backsplash" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/backsplash/backsplash9.jpg', 'MuGa Remodeling — Backsplash')">
+        <img loading="lazy" src="gallery/backsplash/backsplash9.jpg" alt="MuGa Remodeling — Backsplash" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/backsplash/backsplash99.jpg', 'MuGa Remodeling — Backsplash')">
+        <img loading="lazy" src="gallery/backsplash/backsplash99.jpg" alt="MuGa Remodeling — Backsplash" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ INTERIOR CARPENTRY ═══ -->
+  <section class="gallery-section" id="section-carpentry">
+    <div class="gs-header">
+      <div class="gs-title-row">
+        <div class="gs-icon"><i class="fas fa-hammer"></i></div>
+        <div>
+          <h2 class="gs-title">Interior Carpentry</h2>
+          <div class="gs-count">7 photos</div>
+        </div>
+      </div>
+    </div>
+    <div class="gs-grid">
+      <div class="gs-item" onclick="openLightbox('gallery/carpentry/puerta10.jpg', 'MuGa Remodeling — Interior Carpentry')">
+        <img loading="lazy" src="gallery/carpentry/puerta10.jpg" alt="MuGa Remodeling — Interior Carpentry" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/carpentry/puerta11.jpg', 'MuGa Remodeling — Interior Carpentry')">
+        <img loading="lazy" src="gallery/carpentry/puerta11.jpg" alt="MuGa Remodeling — Interior Carpentry" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/carpentry/puerta12.jpg', 'MuGa Remodeling — Interior Carpentry')">
+        <img loading="lazy" src="gallery/carpentry/puerta12.jpg" alt="MuGa Remodeling — Interior Carpentry" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/carpentry/puerta13.jpg', 'MuGa Remodeling — Interior Carpentry')">
+        <img loading="lazy" src="gallery/carpentry/puerta13.jpg" alt="MuGa Remodeling — Interior Carpentry" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/carpentry/puerta6.jpg', 'MuGa Remodeling — Interior Carpentry')">
+        <img loading="lazy" src="gallery/carpentry/puerta6.jpg" alt="MuGa Remodeling — Interior Carpentry" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/carpentry/puerta7.jpg', 'MuGa Remodeling — Interior Carpentry')">
+        <img loading="lazy" src="gallery/carpentry/puerta7.jpg" alt="MuGa Remodeling — Interior Carpentry" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/carpentry/puerta8.jpg', 'MuGa Remodeling — Interior Carpentry')">
+        <img loading="lazy" src="gallery/carpentry/puerta8.jpg" alt="MuGa Remodeling — Interior Carpentry" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ DOORS & WINDOWS ═══ -->
+  <section class="gallery-section" id="section-doors-windows">
+    <div class="gs-header">
+      <div class="gs-title-row">
+        <div class="gs-icon"><i class="fas fa-door-open"></i></div>
+        <div>
+          <h2 class="gs-title">Doors & Windows</h2>
+          <div class="gs-count">5 photos</div>
+        </div>
+      </div>
+    </div>
+    <div class="gs-grid">
+      <div class="gs-item" onclick="openLightbox('gallery/doors-windows/puerta1.jpg', 'MuGa Remodeling — Doors & Windows')">
+        <img loading="lazy" src="gallery/doors-windows/puerta1.jpg" alt="MuGa Remodeling — Doors & Windows" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/doors-windows/puerta2.jpg', 'MuGa Remodeling — Doors & Windows')">
+        <img loading="lazy" src="gallery/doors-windows/puerta2.jpg" alt="MuGa Remodeling — Doors & Windows" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/doors-windows/puerta3.jpg', 'MuGa Remodeling — Doors & Windows')">
+        <img loading="lazy" src="gallery/doors-windows/puerta3.jpg" alt="MuGa Remodeling — Doors & Windows" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/doors-windows/puerta4.jpg', 'MuGa Remodeling — Doors & Windows')">
+        <img loading="lazy" src="gallery/doors-windows/puerta4.jpg" alt="MuGa Remodeling — Doors & Windows" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/doors-windows/puerta6.jpg', 'MuGa Remodeling — Doors & Windows')">
+        <img loading="lazy" src="gallery/doors-windows/puerta6.jpg" alt="MuGa Remodeling — Doors & Windows" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ DRYWALL & TEXTURE ═══ -->
+  <section class="gallery-section" id="section-drywall-texture">
+    <div class="gs-header">
+      <div class="gs-title-row">
+        <div class="gs-icon"><i class="fas fa-layer-group"></i></div>
+        <div>
+          <h2 class="gs-title">Drywall & Texture</h2>
+          <div class="gs-count">13 photos</div>
+        </div>
+      </div>
+    </div>
+    <div class="gs-grid">
+      <div class="gs-item" onclick="openLightbox('gallery/drywall-texture/drywall10.jpg', 'MuGa Remodeling — Drywall & Texture')">
+        <img loading="lazy" src="gallery/drywall-texture/drywall10.jpg" alt="MuGa Remodeling — Drywall & Texture" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/drywall-texture/drywall11.jpg', 'MuGa Remodeling — Drywall & Texture')">
+        <img loading="lazy" src="gallery/drywall-texture/drywall11.jpg" alt="MuGa Remodeling — Drywall & Texture" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/drywall-texture/drywall12.jpg', 'MuGa Remodeling — Drywall & Texture')">
+        <img loading="lazy" src="gallery/drywall-texture/drywall12.jpg" alt="MuGa Remodeling — Drywall & Texture" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/drywall-texture/drywall13.jpg', 'MuGa Remodeling — Drywall & Texture')">
+        <img loading="lazy" src="gallery/drywall-texture/drywall13.jpg" alt="MuGa Remodeling — Drywall & Texture" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/drywall-texture/drywall14.jpg', 'MuGa Remodeling — Drywall & Texture')">
+        <img loading="lazy" src="gallery/drywall-texture/drywall14.jpg" alt="MuGa Remodeling — Drywall & Texture" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/drywall-texture/drywall15.jpg', 'MuGa Remodeling — Drywall & Texture')">
+        <img loading="lazy" src="gallery/drywall-texture/drywall15.jpg" alt="MuGa Remodeling — Drywall & Texture" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/drywall-texture/drywall3.jpg', 'MuGa Remodeling — Drywall & Texture')">
+        <img loading="lazy" src="gallery/drywall-texture/drywall3.jpg" alt="MuGa Remodeling — Drywall & Texture" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/drywall-texture/drywall4.jpg', 'MuGa Remodeling — Drywall & Texture')">
+        <img loading="lazy" src="gallery/drywall-texture/drywall4.jpg" alt="MuGa Remodeling — Drywall & Texture" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/drywall-texture/drywall5.jpg', 'MuGa Remodeling — Drywall & Texture')">
+        <img loading="lazy" src="gallery/drywall-texture/drywall5.jpg" alt="MuGa Remodeling — Drywall & Texture" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/drywall-texture/drywall6.jpg', 'MuGa Remodeling — Drywall & Texture')">
+        <img loading="lazy" src="gallery/drywall-texture/drywall6.jpg" alt="MuGa Remodeling — Drywall & Texture" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/drywall-texture/drywall7.jpg', 'MuGa Remodeling — Drywall & Texture')">
+        <img loading="lazy" src="gallery/drywall-texture/drywall7.jpg" alt="MuGa Remodeling — Drywall & Texture" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/drywall-texture/drywall8.jpg', 'MuGa Remodeling — Drywall & Texture')">
+        <img loading="lazy" src="gallery/drywall-texture/drywall8.jpg" alt="MuGa Remodeling — Drywall & Texture" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/drywall-texture/drywall9.jpg', 'MuGa Remodeling — Drywall & Texture')">
+        <img loading="lazy" src="gallery/drywall-texture/drywall9.jpg" alt="MuGa Remodeling — Drywall & Texture" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ FIREPLACE & ACCENT WALLS ═══ -->
+  <section class="gallery-section" id="section-fireplace-accent-walls">
+    <div class="gs-header">
+      <div class="gs-title-row">
+        <div class="gs-icon"><i class="fas fa-fire"></i></div>
+        <div>
+          <h2 class="gs-title">Fireplace & Accent Walls</h2>
+          <div class="gs-count">5 photos</div>
+        </div>
+      </div>
+    </div>
+    <div class="gs-grid">
+      <div class="gs-item" onclick="openLightbox('gallery/fireplace-accent-walls/backsplash111.jpg', 'MuGa Remodeling — Fireplace & Accent Walls')">
+        <img loading="lazy" src="gallery/fireplace-accent-walls/backsplash111.jpg" alt="MuGa Remodeling — Fireplace & Accent Walls" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/fireplace-accent-walls/backsplash112.jpg', 'MuGa Remodeling — Fireplace & Accent Walls')">
+        <img loading="lazy" src="gallery/fireplace-accent-walls/backsplash112.jpg" alt="MuGa Remodeling — Fireplace & Accent Walls" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/fireplace-accent-walls/backsplash13.jpg', 'MuGa Remodeling — Fireplace & Accent Walls')">
+        <img loading="lazy" src="gallery/fireplace-accent-walls/backsplash13.jpg" alt="MuGa Remodeling — Fireplace & Accent Walls" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/fireplace-accent-walls/piso31.jpg', 'MuGa Remodeling — Fireplace & Accent Walls')">
+        <img loading="lazy" src="gallery/fireplace-accent-walls/piso31.jpg" alt="MuGa Remodeling — Fireplace & Accent Walls" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+      <div class="gs-item" onclick="openLightbox('gallery/fireplace-accent-walls/puerta9.jpg', 'MuGa Remodeling — Fireplace & Accent Walls')">
+        <img loading="lazy" src="gallery/fireplace-accent-walls/puerta9.jpg" alt="MuGa Remodeling — Fireplace & Accent Walls" onerror="this.parentElement.style.display='none'">
+        <div class="gs-overlay"><i class="fas fa-expand"></i></div>
+      </div>
+    </div>
+  </section>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- CTA -->
+  <section class="cta-section">
+    <div class="container" style="text-align:center;">
+      <div class="section-eyebrow" style="justify-content:center;">Like What You See?</div>
+      <h2 class="section-title" style="text-align:center;">Ready to Transform <em>Your Home?</em></h2>
+      <p class="section-desc" style="margin:0 auto 36px;">Schedule your free estimate — Alejandro or Bryant will personally follow up within 1 hour.</p>
+      <div class="cta-actions">
+        <a href="free-quote.html" class="btn btn-gold"><i class="fas fa-calendar-alt"></i> Book Free Estimate</a>
+        <a href="tel:0000000000" class="btn btn-outline"><i class="fas fa-phone"></i> Call 000-000-0000</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="footer-logo-main">Mu<span>Ga</span></div>
+          <div class="footer-logo-sub">Remodeling &amp; Construction</div>
+          <p class="footer-brand-desc">MuGa Remodeling delivers premium home renovations across West Coast Florida — elite craftsmanship, transparent pricing, and a reputation built on results.</p>
+          <div class="footer-social">
+            <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+          </div>
+        </div>
+        <div>
+          <div class="footer-col-title">Services</div>
+          <ul class="footer-links">
+            <li><a href="services.html#bathroom">Bathroom Remodeling</a></li>
+            <li><a href="services.html#flooring">Floor Tile &amp; Flooring</a></li>
+            <li><a href="services.html#kitchen">Kitchen Remodeling</a></li>
+            <li><a href="services.html#intpaint">Interior Painting</a></li>
+            <li><a href="services.html#extpaint">Exterior Painting</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Gallery</div>
+          <ul class="footer-links">
+            <li><a href="gallery.html#section-general">All Projects</a></li>
+            <li><a href="gallery.html#section-bathroom">Bathroom</a></li>
+            <li><a href="gallery.html#section-kitchen">Kitchen</a></li>
+            <li><a href="gallery.html#section-flooring">Flooring</a></li>
+            <li><a href="gallery.html#section-interior-painting">Interior Painting</a></li>
+          </ul>
+        </div>
+        <div>
+          <div class="footer-col-title">Contact</div>
+          <ul class="footer-links">
+            <li><a href="tel:0000000000"><i class="fas fa-phone" style="color:var(--gold);margin-right:8px;"></i>000-000-0000</a></li>
+            <li><a href="mailto:mugaremodeling@gmail.com"><i class="fas fa-envelope" style="color:var(--gold);margin-right:8px;"></i>mugaremodeling@gmail.com</a></li>
+            <li style="color:rgba(255,255,255,.4);font-size:.82rem;">Mon–Sat · West Coast Florida</li>
+            <li style="margin-top:14px;"><a href="free-quote.html" class="btn btn-gold" style="width:100%;justify-content:center;padding:11px 18px;font-size:.74rem;">Book Free Estimate</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 MuGa Remodeling &amp; Construction. All rights reserved.</p>
+        <div class="footer-badges">
+          <div class="footer-badge"><i class="fas fa-shield-alt"></i> Registered, Insured &amp; Experienced</div>
+          <div class="footer-badge"><i class="fas fa-star"></i> 5-Star Rated</div>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- FAB CLUSTER -->
+  <div class="fab-cluster">
+    <a href="tel:0000000000" class="fab-btn"><i class="fas fa-phone"></i><span>Call Now</span></a>
+    <a href="mailto:mugaremodeling@gmail.com" class="fab-btn"><i class="fas fa-envelope"></i><span>Email</span></a>
+    <a href="free-quote.html" class="fab-btn fab-primary"><i class="fas fa-calendar-alt"></i><span>Free Quote</span></a>
+  </div>
+
+  <nav class="mobile-nav" id="mobileNav" aria-hidden="true" role="dialog" aria-label="Navigation menu">
+    <div class="mobile-nav-inner">
+      <div class="mobile-nav-header">
+        <div><div class="mobile-nav-logo">Mu<span>Ga</span></div><span class="mobile-nav-logo-sub">Remodeling &amp; Construction</span></div>
+        <button class="mobile-nav-close" onclick="closeMobileNav()" aria-label="Close menu"><i class="fas fa-times"></i></button>
+      </div>
+      <ul class="mobile-nav-links">
+        <li><a href="index.html" onclick="closeMobileNav()">Home <i class="fas fa-chevron-right"></i></a></li>
+        <li><a href="services.html" onclick="closeMobileNav()">Services <i class="fas fa-chevron-right"></i></a></li>
+        <li><a href="gallery.html" onclick="closeMobileNav()" class="active">Gallery <i class="fas fa-chevron-right"></i></a></li>
+        <li><a href="about.html" onclick="closeMobileNav()">About <i class="fas fa-chevron-right"></i></a></li>
+        <li><a href="reviews.html" onclick="closeMobileNav()">Reviews <i class="fas fa-chevron-right"></i></a></li>
+        <li><a href="areas.html" onclick="closeMobileNav()">Areas <i class="fas fa-chevron-right"></i></a></li>
+        <li><a href="contact.html" onclick="closeMobileNav()">Contact <i class="fas fa-chevron-right"></i></a></li>
+      </ul>
+      <div class="mobile-nav-footer">
+        <a href="free-quote.html" class="mobile-nav-cta"><i class="fas fa-calendar-alt"></i> Book Free Estimate</a>
+        <div class="mobile-nav-contact">
+          <a href="tel:0000000000"><i class="fas fa-phone"></i> Call Now</a>
+          <a href="mailto:mugaremodeling@gmail.com"><i class="fas fa-envelope"></i> Email</a>
+        </div>
+        <div class="mobile-nav-trust"><i class="fas fa-shield-alt"></i> Registered &middot; Insured &middot; 5-Star Rated</div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+    <button class="lb-close" onclick="closeLightbox()"><i class="fas fa-times"></i></button>
+    <button class="lb-nav lb-prev" onclick="lbNav(-1); event.stopPropagation()"><i class="fas fa-chevron-left"></i></button>
+    <img id="lb-img" src="" alt="">
+    <button class="lb-nav lb-next" onclick="lbNav(1); event.stopPropagation()"><i class="fas fa-chevron-right"></i></button>
+    <div class="lb-counter" id="lb-counter"></div>
+  </div>
+
+  <script src="scripts.js"></script>
+  <script>
+    // ── Gallery sidebar active tracking ──
+    const gnLinks = document.querySelectorAll('.gn-link');
+    const sections = document.querySelectorAll('.gallery-section');
+
+    // Track which section is most visible in the center of the viewport
+    let activeSection = null;
+
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          activeSection = e.target.id;
+          gnLinks.forEach(l => l.classList.toggle('active', l.dataset.target === activeSection));
+        }
+      });
+    }, {
+      threshold: 0,
+      rootMargin: '-35% 0px -35% 0px'
+    });
+    sections.forEach(s => sectionObserver.observe(s));
+
+    // ── Lightbox ──
+    let lbImages = [];
+    let lbIndex  = 0;
+
+    function buildImageList() {
+      lbImages = Array.from(document.querySelectorAll('.gs-item img')).map(img => ({
+        src: img.src,
+        alt: img.alt
+      }));
+    }
+
+    function openLightbox(src, alt) {
+      buildImageList();
+      // Find index
+      lbIndex = lbImages.findIndex(i => i.src.endsWith(src.split('/').pop()) || i.src === src);
+      if (lbIndex === -1) lbIndex = 0;
+      showLbImage();
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function showLbImage() {
+      const img = document.getElementById('lb-img');
+      const item = lbImages[lbIndex];
+      if (item) {
+        img.src = item.src;
+        img.alt = item.alt;
+      }
+      document.getElementById('lb-counter').textContent = `${lbIndex + 1} / ${lbImages.length}`;
+    }
+
+    function lbNav(dir) {
+      lbIndex = (lbIndex + dir + lbImages.length) % lbImages.length;
+      showLbImage();
+    }
+
+    function closeLightbox(e) {
+      if (e && e.target !== document.getElementById('lightbox') && !e.target.classList.contains('lb-close')) return;
+      if (!e) {
+        document.getElementById('lightbox').classList.remove('open');
+        document.body.style.overflow = '';
+        return;
+      }
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.addEventListener('keydown', e => {
+      const lb = document.getElementById('lightbox');
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'ArrowRight') lbNav(1);
+      if (e.key === 'ArrowLeft')  lbNav(-1);
+      if (e.key === 'Escape')     closeLightbox();
+        });
+      </script>
+
+      <!-- MOBILE NAV OVERLAY -->
+      <div id="mobileNavOverlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:1099;opacity:0;transition:opacity .35s;"></div>
+
+</body>
+</html>
